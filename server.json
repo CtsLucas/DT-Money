@@ -23,6 +23,22 @@
       "category": "Curso",
       "price": 1400,
       "createdAt": "2022-11-22T14:23:58.312Z"
+    },
+    {
+      "description": "Densolvimento de aplicativo",
+      "category": "trabalho",
+      "price": 5000,
+      "type": "income",
+      "createdAt": "2022-12-22T17:17:55.382Z",
+      "id": 4
+    },
+    {
+      "description": "Pizza",
+      "category": "Alimentação",
+      "price": 45,
+      "type": "outcome",
+      "createdAt": "2022-12-22T17:31:11.175Z",
+      "id": 5
     }
   ]
 }

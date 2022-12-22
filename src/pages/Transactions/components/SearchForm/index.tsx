@@ -4,8 +4,9 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContextSelector } from 'use-context-selector';
 
-import { SearchFormContainer } from './styles';
 import { TransactionsContext } from '../../../../contexts/TransactionContext';
+
+import { SerachHeader, SearchFormContainer } from './styles';
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -16,9 +17,12 @@ type SearchFormInputs = z.infer<typeof searchFormSchema>;
 export function SearchForm() {
   const fetchTransactions = useContextSelector(
     TransactionsContext,
-    (context) => {
-      return context.fetchTransactions;
-    }
+    (context) => context.fetchTransactions
+  );
+
+  const transaction = useContextSelector(
+    TransactionsContext,
+    (context) => context.transactions
   );
 
   const {
@@ -34,17 +38,25 @@ export function SearchForm() {
   }
 
   return (
-    <SearchFormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
-      <input
-        type="text"
-        placeholder="Busque por transações"
-        {...register('query')}
-      />
+    <>
+      <SerachHeader>
+        <strong>Transações</strong>
+        <span>{`${transaction.length} ${
+          transaction.length !== 1 ? 'itens' : 'item'
+        }`}</span>
+      </SerachHeader>
+      <SearchFormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
+        <input
+          type="text"
+          placeholder="Busque por transações"
+          {...register('query')}
+        />
 
-      <button type="submit" disabled={isSubmitting}>
-        <MagnifyingGlass size={20} />
-        Buscar
-      </button>
-    </SearchFormContainer>
+        <button type="submit" disabled={isSubmitting}>
+          <MagnifyingGlass size={20} />
+          Buscar
+        </button>
+      </SearchFormContainer>
+    </>
   );
 }

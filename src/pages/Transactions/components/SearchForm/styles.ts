@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+export const SerachHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+
+  & > strong {
+    color: ${({ theme }) => theme['gray-300']};
+  }
+
+  & > span {
+    color: ${({ theme }) => theme['gray-500']};
+  }
+`;
+
 export const SearchFormContainer = styled.form`
   display: flex;
   gap: 1rem;

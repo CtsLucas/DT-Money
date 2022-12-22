@@ -35,30 +35,41 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const fetchTransactions = useCallback(async (query?: string) => {
-    const response = await api.get('transactions', {
-      params: {
-        _sort: 'createdAt',
-        _order: 'desc',
-        q: query,
-      },
-    });
+    try {
+      const response = await api.get('transactions', {
+        params: {
+          _sort: 'createdAt',
+          _order: 'desc',
+          q: query,
+        },
+      });
 
-    setTransactions(response.data);
+      setTransactions(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const createTransaction = useCallback(
     async (data: CreateTransactionInput) => {
       const { category, price, description, type } = data;
 
-      const response = await api.post('transactions', {
-        description,
-        category,
-        price,
-        type,
-        createdAt: new Date(),
-      });
+      try {
+        const response = await api.post('transactions', {
+          description,
+          category,
+          price,
+          type,
+          createdAt: new Date(),
+        });
 
-      setTransactions((prevState) => [response.data, ...prevState]);
+        setTransactions((prevState) => [response.data, ...prevState]);
+      } catch (error) {
+        console.log(error);
+        alert(
+          'Não foi possível realizar está ação no momento, tente novamnete mais tarde!'
+        );
+      }
     },
     []
   );

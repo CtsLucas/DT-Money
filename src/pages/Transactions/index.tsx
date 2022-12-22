@@ -7,6 +7,7 @@ import { dateFormatter, priceFormatter } from '../../utils/formatter';
 import { Header } from '../../components/Header';
 import { Summary } from '../../components/Summary';
 import { SearchForm } from './components/SearchForm';
+import { EmptyTransactions } from './components/EmptyTransactions';
 
 import {
   PriceHighLight,
@@ -31,7 +32,8 @@ export function Transaction() {
       <Summary />
 
       <TransactionsContainer>
-        <SearchForm />
+        {transactions.length > 0 ? <SearchForm /> : <EmptyTransactions />}
+
         <TransactionContent>
           {isMobile ? (
             <TransactionsTable>

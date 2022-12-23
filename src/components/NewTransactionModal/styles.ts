@@ -22,7 +22,8 @@ export const CloseButton = styled(Dialog.Close)`
 `;
 
 export const Content = styled(Dialog.Content)`
-  min-width: 32rem;
+  width: 100%;
+  max-width: 32rem;
   border-radius: 6px;
   padding: 2.5rem 3rem;
   background: ${({ theme }) => theme['gray-800']};
@@ -31,6 +32,10 @@ export const Content = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 768px) {
+    padding: 1.25rem 1.5rem;
+  }
 
   form {
     margin-top: 2rem;
